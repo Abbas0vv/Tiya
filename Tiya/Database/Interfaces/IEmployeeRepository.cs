@@ -1,8 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Tiya.Database.DomainModels;
+﻿using Tiya.Database.DomainModels;
 using Tiya.Database.ViewModels;
-using Tiya.Extentions;
-
 namespace Tiya.Database.Interfaces;
 
 public interface IEmployeeRepository

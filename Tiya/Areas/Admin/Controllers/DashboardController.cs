@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Tiya.Database.DomainModels.Account;
 using Tiya.Database.Interfaces;
 using Tiya.Database.ViewModels;
 
 namespace Tiya.Areas.Admin.Controllers;
 
 [Area(nameof(Admin))]
+[Authorize(Roles = "Admin")]
 public class DashboardController : Controller
 {
     private readonly IEmployeeRepository _repository;
@@ -23,7 +26,7 @@ public class DashboardController : Controller
     }
 
     [HttpGet]
-    public IActionResult NotFound()
+    public IActionResult NotFoundPage()
     {
         return View();
     }
@@ -45,9 +48,9 @@ public class DashboardController : Controller
     [HttpGet]
     public async Task<IActionResult> Update(int? id)
     {
-        if (id is null) return RedirectToAction(nameof(NotFound));
+        if (id is null) return RedirectToAction(nameof(NotFoundPage));
         var employee = await _repository.GetById(id);
-        if (employee is null) return RedirectToAction(nameof(NotFound));
+        if (employee is null) return RedirectToAction(nameof(NotFoundPage));
         var model = new UpdateEmployeeViewModel()
         {
             Name = employee.Name,
@@ -61,9 +64,9 @@ public class DashboardController : Controller
     [HttpPost]
     public async Task<IActionResult> Update(int? id, UpdateEmployeeViewModel model)
     {
-        if (id is null) return RedirectToAction(nameof(NotFound));
+        if (id is null) return RedirectToAction(nameof(NotFoundPage));
         var employee = await _repository.GetById(id);
-        if (employee is null) return RedirectToAction(nameof(NotFound));
+        if (employee is null) return RedirectToAction(nameof(NotFoundPage));
         if (!ModelState.IsValid) return View(model);
         await _repository.Update(id, model);
 
@@ -73,7 +76,7 @@ public class DashboardController : Controller
     [HttpGet]
     public async Task<IActionResult> Delete(int? id)
     {
-        if (id is null) return RedirectToAction(nameof(NotFound));
+        if (id is null) return RedirectToAction(nameof(NotFoundPage));
         await _repository.Remove(id);
         return RedirectToAction(nameof(Index));
     }

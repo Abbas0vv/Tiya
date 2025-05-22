@@ -9,6 +9,7 @@ public interface IUserRepository
     Task Register(RegisterViewModel model);
     Task Login(LoginViewModel model);
     Task LogOut();
+    Task CreateRole();
 }
 
 

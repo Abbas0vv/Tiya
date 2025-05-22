@@ -2,7 +2,7 @@
 using Tiya.Database.DomainModels;
 using Tiya.Database.Interfaces;
 using Tiya.Database.ViewModels;
-using Tiya.Extentions;
+using Tiya.Helpers.Extentions;
 
 namespace Tiya.Database.Repositories;
 

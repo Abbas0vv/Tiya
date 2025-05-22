@@ -19,8 +19,9 @@ namespace Tiya
             builder.Services.AddDbContext<TiyaDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
-            builder.Services.AddIdentity<TiyaUser, TiyaRole>()
-                .AddEntityFrameworkStores<TiyaDbContext>();
+            builder.Services.AddIdentity<TiyaUser, IdentityRole>()
+                .AddEntityFrameworkStores<TiyaDbContext>()
+                .AddDefaultTokenProviders();
 
             builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
             builder.Services.AddRazorPages();

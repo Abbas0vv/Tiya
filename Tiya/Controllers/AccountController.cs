@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Tiya.Database.DomainModels.Account;
 using Tiya.Database.Interfaces;
 using Tiya.Database.ViewModels;
 
@@ -45,6 +46,13 @@ public class AccountController : Controller
     public async Task<IActionResult> LogOut()
     {
         await _userRepository.LogOut();
+        return RedirectToAction("Index", "Home");
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> CreateRole()
+    {
+        await _userRepository.CreateRole();
         return RedirectToAction("Index", "Home");
     }
 }
