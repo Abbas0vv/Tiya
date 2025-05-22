@@ -27,6 +27,7 @@ namespace Tiya
 
 
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
 
             builder.Services.Configure<IdentityOptions>(options =>
             {
