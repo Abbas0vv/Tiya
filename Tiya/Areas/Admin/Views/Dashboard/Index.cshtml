@@ -1,0 +1,40 @@
+﻿@model List<Employee>
+
+@{
+    ViewData["Title"] = "Employee List";
+}
+
+<h2 class="mb-4">Employee List</h2>
+
+<div class="mb-3 text-end">
+    <a href="/Admin/Dashboard/Create" class="btn btn-success">Add Employee</a>
+</div>
+
+<table class="table table-striped table-bordered align-middle text-center">
+    <thead class="table-dark">
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>About</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>@employee.Name</td>
+                <td>@employee.Position</td>
+                <td>@employee.About</td>
+                <td>
+                    <img src="/Uploads/Employee/@employee.ImageUrl" alt="Image" width="80" height="80" style="object-fit: cover; border-radius: 8px;" />
+                </td>
+                <td>
+                    <a href="/Admin/Dashboard/Update/@employee.Id" class="btn btn-sm btn-primary me-1">Edit</a>
+                    <a href="/Admin/Dashboard/Delete/@employee.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
